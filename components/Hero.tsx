@@ -38,11 +38,11 @@ export default function Hero() {
   }, []);
 
   const toWork = (e: React.MouseEvent) => {
-    const t = document.getElementById("work");
+    const t = document.getElementById("motion");
     if (!t) return;
     e.preventDefault();
     const l = lenis();
-    if (l) l.scrollTo(t, { offset: -40, duration: 1.4 });
+    if (l) l.scrollTo(t, { offset: 0, duration: 1.4 });
     else t.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -51,7 +51,7 @@ export default function Hero() {
       <div className="wrap hero__meta">
         <span className="label">Portfolio · 2025–26</span>
         <span className="label">
-          Kota, IN · <Clock /> IST
+          Noida, IN · <Clock /> IST
         </span>
         <span className="label">Now: design & edit at Amrut.AI</span>
       </div>
@@ -63,11 +63,11 @@ export default function Hero() {
             <span className="hero__mark" aria-hidden="true">
               <Monogram />
             </span>
-            , a graphic designer &amp; video editor. I build brand systems, campaigns and motion that{" "}
+            , a graphic designer &amp; AI video editor. I build brand systems, campaigns and AI-made ads that{" "}
             <em className="it">hold up</em> on a phone, a menu card and a street hoarding.
           </h1>
           <div className="hero__aside rv" style={{ ["--d" as string]: 2 }}>
-            <a className="btn btn--solid" href="#work" onClick={toWork}>
+            <a className="btn btn--solid" href="#motion" onClick={toWork}>
               See the work <ArrowDown />
             </a>
             <a className="btn" href={person.cv} target="_blank" rel="noopener">
@@ -101,7 +101,7 @@ export default function Hero() {
         <span className="label scroll-cue">
           <i aria-hidden="true" /> Scroll
         </span>
-        <span className="label">Brand · Social · Print · Motion</span>
+        <span className="label">Brand · Social · Print · AI video</span>
         <span className="label">Selected work 2025–26</span>
       </div>
     </section>

@@ -18,8 +18,8 @@ const shot = (img: Img, title: string, caption: string): Shot => ({ ...img, titl
 
 export const person = {
   name: "Gudita Jain",
-  role: "Graphic designer & video editor",
-  city: "Kota, Rajasthan",
+  role: "Graphic designer & AI video editor",
+  city: "Noida, India",
   email: "guditajain04@gmail.com",
   phone: "+91 80005 89734",
   phoneHref: "tel:+918000589734",
@@ -1101,6 +1101,44 @@ export const projects: Project[] = [
 
 export const getProject = (slug: string) => projects.find((p) => p.slug === slug);
 
+/* ---------------- featured AI ad ---------------- */
+
+/* Three cuts of the same ad, frame-for-frame in sync: the final ad and two
+   behind-the-scenes cuts showing the build in Lovart. */
+export const aiAd = {
+  title: "Lovart: a 52-second ad where nothing was filmed",
+  client: "Lovart",
+  year: "2026",
+  dur: 52.28,
+  fps: 25,
+  lead: "Every face, room and city in this ad was generated. The hook, pacing, captions, sound and the cut were made by hand.",
+  note: "An Instagram ad for Lovart, an AI design agent. The presenter is one AI character carried through twelve scenes without his face, outfit or pose drifting. That consistency is the hard part, and the behind-the-scenes cuts show where it happens.",
+  cuts: [
+    { id: "final", label: "Final ad", sub: "As it ran · with sound", audio: true, src: { hd: "/video/lovart-ad.mp4", sd: "/video/lovart-ad-540.mp4" }, poster: im("lovart/poster-ad", 720, 1280, "Lovart ad: an AI-generated presenter under a LOVART title.") },
+    { id: "dark", label: "How it was built", sub: "Lovart workspace · dark", audio: false, src: { hd: "/video/lovart-process-01.mp4", sd: "/video/lovart-process-01.mp4" }, poster: im("lovart/poster-process-01", 720, 1280, "Behind the scenes: the Lovart workspace above, the finished shot below.") },
+    { id: "light", label: "How it was built", sub: "Lovart workspace · light", audio: false, src: { hd: "/video/lovart-process-02.mp4", sd: "/video/lovart-process-02.mp4" }, poster: im("lovart/poster-process-02", 720, 1280, "Behind the scenes in the light workspace.") },
+  ],
+  beats: [
+    { t: 0, label: "Hook", text: "Three seconds, straight to camera, before anyone can scroll past." },
+    { t: 4, label: "Reveal", text: "“All AI.” The twist lands before the product is named." },
+    { t: 6, label: "Prompt to sketch", text: "A text prompt becomes a pencil sketch, then a rendered shot." },
+    { t: 16, label: "New scene", text: "The background swaps; the character stays exactly the same." },
+    { t: 20, label: "Consistency check", text: "Face, outfit, pose and lighting checked against the original." },
+    { t: 28, label: "Image to video", text: "Stills turned into moving shots, then the best takes picked." },
+    { t: 36, label: "References", text: "A reference board keeps every new scene on-model." },
+    { t: 40, label: "Sound", text: "Voice, music and effects laid in and balanced by hand." },
+    { t: 44, label: "The edit", text: "Cut to the voice, word-by-word captions, every beat timed." },
+    { t: 48, label: "CTA", text: "One action: comment “LOVART” for the link." },
+  ],
+  steps: [
+    { t: "Hook first", d: "The first three seconds decide the ad, so the claim, “all AI”, comes before the product." },
+    { t: "Generate", d: "Character, scenes and shots generated in Lovart from prompts, sketches and references." },
+    { t: "Keep it on-model", d: "One face across twelve scenes. Every shot checked for drift before it made the cut." },
+    { t: "Finish by hand", d: "Pacing, kinetic captions, sound design and the CTA, edited frame by frame." },
+  ],
+  tools: ["Lovart", "Text to image", "Image to video", "Premiere Pro", "Kinetic captions", "Sound design", "9:16"],
+};
+
 /* ---------------- motion reel ---------------- */
 
 /* Each video in the Motion section. To add one: compress it into /public/video
@@ -1213,7 +1251,7 @@ export const facts = [
   { n: 40, suffix: "+", t: "social creatives designed in 13 days for Amrut.AI" },
   { n: 50, suffix: "+", t: "posters, banners and standees for a school in a four-campus group" },
   { n: 6, suffix: "", t: "logos and identities, from sketch to signage" },
-  { n: 3, suffix: "", t: "disciplines under one roof: print, social and motion" },
+  { n: 52, suffix: "s", t: "AI-generated ad for Lovart: every shot generated, every cut made by hand" },
 ];
 
 export const CATEGORIES = ["Social", "Print & outdoor", "Identity", "Web & UI"] as const;
@@ -1275,7 +1313,7 @@ export const capabilities = [
   { t: "Brand identity", d: "Logotype, palette, stationery and the rules that keep it consistent across every surface.", x: "Catfé · Glow Grow", img: I.catfe.logoClay },
   { t: "Social & campaigns", d: "Carousels, ad series, admissions drives and a festive calendar that never misses a morning.", x: "Amrut.AI · Arihant", img: I.amrut.questions },
   { t: "Print & packaging", d: "Posters, menus, pouches, letterheads, standees and bus shelters, checked at real size.", x: "Catfé · Arihant", img: I.catfe.bag },
-  { t: "Motion & video", d: "Logo animation, camera moves, product walkthroughs, kinetic type, reels and short-form edits.", x: "Premiere Pro · After Effects", img: I.clario.poster },
+  { t: "AI video & motion", d: "AI-generated ads directed and finished by hand, product films, camera moves, kinetic captions and short-form edits.", x: "Lovart · Premiere Pro · After Effects", img: im("lovart/poster-ad", 720, 1280, "") },
   { t: "Web, UI & email", d: "Landing pages, app flows and email creatives laid out for a phone screen and a two-second decision.", x: "Starbucks app · SkinVibes", img: I.sbux.splash },
   { t: "Critique & direction", d: "Reviewing work against the brief, writing feedback a designer can act on, and setting one direction a campaign can hold.", x: "Nuage webinar", img: I.nuage.redesign },
 ];
@@ -1298,7 +1336,7 @@ export const experience = [
 export const toolset = [
   { h: "Design", items: ["Adobe Photoshop", "Adobe Illustrator", "Figma", "Canva"] },
   { h: "Motion & video", items: ["Adobe Premiere Pro", "Adobe After Effects", "Kinetic type", "Short-form edits"] },
-  { h: "AI-assisted", items: ["Adobe Firefly", "ChatGPT, Gemini, Claude", "Midjourney", "Higgsfield"] },
+  { h: "AI tools", items: ["Lovart", "Higgsfield", "Midjourney", "Adobe Firefly", "ChatGPT, Gemini, Claude"] },
 ];
 
 export const certifications = [

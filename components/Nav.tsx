@@ -8,8 +8,8 @@ import { getProject, person } from "@/lib/content";
 import { lenis } from "./lenis";
 
 const LINKS = [
-  { id: "work", label: "Work" },
   { id: "motion", label: "Motion" },
+  { id: "work", label: "Work" },
   { id: "about", label: "About" },
   { id: "contact", label: "Contact" },
 ];

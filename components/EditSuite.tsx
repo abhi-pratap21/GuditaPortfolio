@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { reels, type Reel } from "@/lib/content";
 import Lines from "./Lines";
+import AiAd from "./AiAd";
 
 /* A small edit suite around real renders: the program monitor plays the selected clip,
    the timeline is built from that clip's own frames, and the bin switches between clips. */
@@ -152,20 +153,31 @@ export default function EditSuite() {
   return (
     <section className="night" id="motion" aria-label="Motion and edit">
       <div className="wrap sec-head">
-        <span className="label">(02) Motion &amp; edit</span>
+        <span className="label">(01) Motion &amp; edit</span>
         <Lines
           as="h2"
           className="display h-l"
           lines={[
-            "Frames, cuts",
+            "Made with AI.",
             <>
-              and <em className="it">timing.</em>
+              Cut <em className="it">by hand.</em>
             </>,
           ]}
         />
         <p className="rv">
-          The video side of the practice. Press play, step through frame by frame, or drag along the timeline
-          {reels.length > 1 ? ". Pick a clip from the bin to switch." : "."}
+          AI-generated ads directed and finished in the edit, product films and motion. Watch the final ad play beside
+          the build that made it, then open the edit suite below.
+        </p>
+      </div>
+
+      <div className="wrap">
+        <AiAd />
+      </div>
+
+      <div className="wrap suite__head">
+        <span className="label">Edit suite · product films &amp; motion</span>
+        <p className="rv">
+          Press play, step frame by frame, or drag along the timeline{reels.length > 1 ? ". Pick a clip from the bin to switch." : "."}
         </p>
       </div>
 

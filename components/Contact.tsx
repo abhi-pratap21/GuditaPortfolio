@@ -5,6 +5,7 @@ import { person } from "@/lib/content";
 import { ArrowUpRight } from "./Icons";
 import Clock from "./Clock";
 import { lenis } from "./lenis";
+import FooterWordmark from "./FooterWordmark";
 
 export default function Contact() {
   const [toast, setToast] = useState(false);
@@ -78,6 +79,7 @@ export default function Contact() {
           </span>
         </div>
       </div>
+      <FooterWordmark />
       <div className={`toast${toast ? " on" : ""}`} role="status" aria-live="polite">
         {toast ? "Email copied" : ""}
       </div>

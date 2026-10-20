@@ -12,14 +12,14 @@ const fraunces = Fraunces({ subsets: ["latin"], style: ["italic"], axes: ["opsz"
 const mono = JetBrains_Mono({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-jbmono", display: "swap" });
 
 const description =
-  "Gudita Jain is a graphic designer and video editor from Kota, India. Brand identities, social campaigns, print, packaging and motion for Amrut.AI, Catfé, SkinVibes and Arihant Public School.";
+  "Gudita Jain is a graphic designer and video editor based in Noida, India. Brand identities, social campaigns, print, packaging and motion for Amrut.AI, Catfé, SkinVibes and Arihant Public School.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: { default: `${person.name} · Graphic Designer & Video Editor`, template: `%s · ${person.name}` },
   description,
   authors: [{ name: person.name }],
-  keywords: ["Gudita Jain", "graphic designer", "video editor", "brand identity", "social media design", "motion design", "Kota", "portfolio"],
+  keywords: ["Gudita Jain", "graphic designer", "video editor", "brand identity", "social media design", "AI video editor", "motion design", "Noida", "portfolio"],
   openGraph: {
     type: "website",
     title: `${person.name} · Graphic Designer & Video Editor`,
@@ -41,7 +41,7 @@ const jsonLd = {
   name: person.name,
   jobTitle: "Graphic Designer & Video Editor",
   email: `mailto:${person.email}`,
-  address: { "@type": "PostalAddress", addressLocality: "Kota", addressRegion: "Rajasthan", addressCountry: "IN" },
+  address: { "@type": "PostalAddress", addressLocality: "Noida", addressRegion: "Uttar Pradesh", addressCountry: "IN" },
   sameAs: [person.behance, person.linkedin],
   worksFor: { "@type": "Organization", name: "Amrut.AI" },
 };

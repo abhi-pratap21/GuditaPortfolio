@@ -1,15 +1,19 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { archive, CATEGORIES } from "@/lib/content";
 import { lbProps } from "@/lib/lb";
 import Lines from "./Lines";
 
 const FILTERS = ["All", ...CATEGORIES] as const;
+/* "All" opens as a shorter wall that fades out; a category filter always shows everything in it. */
 
 /* Every piece in one wall, filterable by discipline. Click to open full size. */
 export default function Archive() {
   const [f, setF] = useState<(typeof FILTERS)[number]>("All");
+  const [open, setOpen] = useState(false);
+  const top = useRef<HTMLDivElement>(null);
+  const collapsed = f === "All" && !open;
   const counts = useMemo(() => {
     const c: Record<string, number> = { All: archive.length };
     archive.forEach((p) => (c[p.cat] = (c[p.cat] || 0) + 1));
@@ -28,14 +32,23 @@ export default function Archive() {
         </p>
       </div>
       <div className="wrap archive">
-        <div className="filters" role="group" aria-label="Filter by discipline">
+        <div className="filters" role="group" aria-label="Filter by discipline" ref={top}>
           {FILTERS.map((c) => (
-            <button key={c} className="filter" aria-pressed={f === c} onClick={() => setF(c)}>
+            <button key={c} className="filter" aria-pressed={f === c} onClick={() => { setF(c); setOpen(false); }}>
               {c}
               <sup>{counts[c]}</sup>
             </button>
           ))}
         </div>
+        <div
+          className={`wall${collapsed ? " is-collapsed" : ""}`}
+          onFocus={(e) => {
+            // tabbing onto a piece hidden under the fade opens the wall instead of scrolling it
+            if (!collapsed) return;
+            const wall = e.currentTarget.getBoundingClientRect();
+            if (e.target.getBoundingClientRect().bottom > wall.bottom - 200) setOpen(true);
+          }}
+        >
         <div className="masonry">
           {archive.map((p, i) => (
             <button
@@ -55,6 +68,23 @@ export default function Archive() {
             </button>
           ))}
         </div>
+        {collapsed && <span className="wall__fade" aria-hidden="true" />}
+        </div>
+        {f === "All" && (
+          <div className={`more-btn${collapsed ? "" : " is-open"}`}>
+            <button
+              className="btn"
+              aria-expanded={!collapsed}
+              onClick={() => {
+                if (!collapsed) top.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+                setOpen(!open);
+              }}
+            >
+              {collapsed ? `Show all ${archive.length} pieces` : "Show fewer"}
+              <span className="more-btn__n" aria-hidden="true">{collapsed ? "↓" : "↑"}</span>
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

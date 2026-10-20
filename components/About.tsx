@@ -33,7 +33,7 @@ export default function About() {
           />
           <div className="about__bio rv">
             <p>
-              I’m Gudita, a graphic designer and video editor from Kota. I design the logotype, the packaging it lands
+              I’m Gudita, a graphic designer and video editor based in Noida. I design the logotype, the packaging it lands
               on, and the twenty pieces that keep it recognisable everywhere else.
             </p>
             <p>
