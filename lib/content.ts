@@ -1326,9 +1326,9 @@ export const reel: { img: Img; tag: string }[] = [
 ];
 
 export const facts = [
+  { n: 100, suffix: "+", t: "posters, banners and standees for a school in a four-campus group" },
   { n: 40, suffix: "+", t: "social creatives designed in 13 days for Amrut.AI" },
-  { n: 50, suffix: "+", t: "posters, banners and standees for a school in a four-campus group" },
-  { n: 6, suffix: "", t: "logos and identities, from sketch to signage" },
+   { n: 20, suffix: "+", t: "logos and identities, from sketch to signage" },
   { n: 52, suffix: "s", t: "AI-generated ad for Lovart: every shot generated, every cut made by hand" },
 ];
 

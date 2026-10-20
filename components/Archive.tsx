@@ -14,11 +14,6 @@ export default function Archive() {
   const [open, setOpen] = useState(false);
   const top = useRef<HTMLDivElement>(null);
   const collapsed = f === "All" && !open;
-  const counts = useMemo(() => {
-    const c: Record<string, number> = { All: archive.length };
-    archive.forEach((p) => (c[p.cat] = (c[p.cat] || 0) + 1));
-    return c;
-  }, []);
   const clients = useMemo(() => new Set(archive.map((p) => p.client)).size, []);
 
   return (
@@ -36,7 +31,6 @@ export default function Archive() {
           {FILTERS.map((c) => (
             <button key={c} className="filter" aria-pressed={f === c} onClick={() => { setF(c); setOpen(false); }}>
               {c}
-              <sup>{counts[c]}</sup>
             </button>
           ))}
         </div>
