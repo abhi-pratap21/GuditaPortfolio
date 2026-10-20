@@ -3,9 +3,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { aiAd } from "@/lib/content";
 
-/* The featured AI ad: the final cut and two behind-the-scenes cuts, played in lockstep.
-   On desktop all three play and follow the final ad; on a phone one plays at a time
-   and keeps the shared time when you switch. */
+/* The featured AI ad: two final ads (dark and light) and the presenter cut they were
+   built from, played in lockstep. Index 0, the dark final, carries the sound and the clock.
+   On desktop all three play; on a phone one plays at a time and keeps the shared time. */
 
 const p2 = (n: number) => String(n).padStart(2, "0");
 const tc = (s: number) => `${p2(Math.floor(s / 60))}:${p2(Math.floor(s) % 60)}`;
@@ -200,14 +200,14 @@ export default function AiAd() {
         <div className="aiad__tabs" role="tablist" aria-label="Choose a cut">
           {aiAd.cuts.map((c, i) => (
             <button key={c.id} role="tab" aria-selected={i === active} className={i === active ? "is-on" : ""} onClick={() => choose(i)}>
-              {i === 0 ? "Final ad" : `Build · ${c.id}`}
+              {c.tab}
             </button>
           ))}
         </div>
 
         <div className="aiad__phones">
           {aiAd.cuts.map((c, i) => (
-            <figure key={c.id} className={`phone phone--${c.id}${i === active ? " is-on" : ""}`}>
+            <figure key={c.id} className={`phone phone--${c.id}${c.final ? " phone--hl" : ""}${i === active ? " is-on" : ""}`}>
               <div className="phone__body">
                 <video
                   ref={(el) => {
@@ -296,7 +296,7 @@ export default function AiAd() {
             </button>
           ))}
         </div>
-        <p className="aiad__hint label">Three cuts, one clock. Click a beat to jump, or tap any phone to pause.</p>
+        <p className="aiad__hint label">Two finals and the build, one clock. Click a beat to jump, or tap any phone to pause.</p>
       </div>
     </div>
   );

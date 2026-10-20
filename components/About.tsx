@@ -1,4 +1,4 @@
-import { certifications, experience, person, toolset } from "@/lib/content";
+import { certifications, education, experience, person, toolset } from "@/lib/content";
 import { Monogram } from "./Wordmark";
 import { ArrowUpRight } from "./Icons";
 import Lines from "./Lines";
@@ -13,7 +13,7 @@ export default function About() {
         <figure className={`portrait rv${person.portrait ? "" : " no-photo"}`}>
           <div className="portrait__frame">
             {person.portrait && (
-              <img src={person.portrait} width={person.portraitSize.w} height={person.portraitSize.h} alt="Gudita Jain in a navy saree, smiling, lit from behind against a dark backdrop" loading="lazy" decoding="async" />
+              <img src={person.portrait} width={person.portraitSize.w} height={person.portraitSize.h} alt="Gudita Jain, in a burgundy blazer and glasses, against a plain light backdrop" loading="lazy" decoding="async" />
             )}
             <div className="portrait__fallback" aria-hidden={!!person.portrait}>
               <Monogram />
@@ -33,7 +33,7 @@ export default function About() {
           />
           <div className="about__bio rv">
             <p>
-              I’m Gudita, a graphic designer and video editor based in Noida. I design the logotype, the packaging it lands
+              I’m Gudita, a graphic designer and AI video editor based in Noida. I design the logotype, the packaging it lands
               on, and the twenty pieces that keep it recognisable everywhere else.
             </p>
             <p>
@@ -44,27 +44,35 @@ export default function About() {
               based in Vancouver.
             </p>
             <p>
-              The motion side comes from my degree in Animation &amp; Gaming. Different audiences, same discipline:
+              The motion side comes from my degree in Animation &amp; Gaming, and today it includes motion graphics and AI-generated ads that I direct and finish by hand. Different audiences, same discipline:
               decide the idea first, then make it survive a business card, a billboard and a phone screen without losing
               its voice.
             </p>
           </div>
 
-          <div className="xp">
-            <h3 className="label">Experience &amp; education</h3>
-            <ul>
-              {experience.map((x) => (
-                <li key={x.role} className="rv">
-                  <div>
-                    <strong>{x.role}</strong>
-                    <small>{x.org}</small>
-                  </div>
-                  <span className="where">{x.where}</span>
-                  <span className={`when${x.now ? " now" : ""}`}>{x.when}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {[
+            { h: "Experience", items: experience },
+            { h: "Education", items: education },
+          ].map((g) => (
+            <div className="xp" key={g.h}>
+              <h3 className="xp__h">
+                {g.h}
+                <span className="label">{String(g.items.length).padStart(2, "0")}</span>
+              </h3>
+              <ul>
+                {g.items.map((x) => (
+                  <li key={x.role} className="rv">
+                    <div>
+                      <strong>{x.role}</strong>
+                      <small>{x.org}</small>
+                    </div>
+                    <span className="where">{x.where}</span>
+                    <span className={`when${"now" in x && x.now ? " now" : ""}`}>{x.when}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
 
           <div className="tools">
             {toolset.map((t) => (

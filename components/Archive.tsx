@@ -80,7 +80,7 @@ export default function Archive() {
                 setOpen(!open);
               }}
             >
-              {collapsed ? `Show all ${archive.length} pieces` : "Show fewer"}
+              {collapsed ? "Show all" : "Show less"}
               <span className="more-btn__n" aria-hidden="true">{collapsed ? "↓" : "↑"}</span>
             </button>
           </div>

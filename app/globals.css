@@ -874,8 +874,8 @@ h1, h2, h3, h4, p, figure, blockquote { margin: 0; }
 .aiad__stage { position: sticky; top: calc(var(--navh) + 16px); }
 .aiad__tabs { display: none; }
 .aiad__phones { display: grid; grid-template-columns: 1fr 1.18fr 1fr; gap: clamp(10px, 1.4vw, 22px); align-items: end; }
-.phone--final { order: 2; }
 .phone--dark { order: 1; }
+.phone--raw { order: 2; }
 .phone--light { order: 3; }
 .phone__body { position: relative; aspect-ratio: 9 / 16; border-radius: clamp(20px, 2.4vw, 36px); padding: 6px; background: #050505; box-shadow: 0 0 0 1px rgba(255,255,255,.12), 0 0 0 4px #1d1c1a, 0 40px 80px -30px rgba(0,0,0,.8); overflow: hidden; }
 .phone--final .phone__body { box-shadow: 0 0 0 1px rgba(255,255,255,.18), 0 0 0 4px #1d1c1a, 0 0 0 5px rgba(232,64,28,.55), 0 50px 100px -30px rgba(232,64,28,.35); }
@@ -1007,3 +1007,17 @@ html, body { overflow-x: clip; }
 .hero__stack .card.is-on[style*="z-index: 5"] .card__tag { opacity: 1; transform: none; }
 .hero__stack { height: clamp(360px, 52vh, 600px); }
 @media (max-width: 900px) { .hero__stack { height: clamp(260px, 76vw, 440px); } }
+
+/* the two finals carry the highlight; the build in the middle stays neutral */
+.phone--hl .phone__body { box-shadow: 0 0 0 1px rgba(255,255,255,.18), 0 0 0 4px #1d1c1a, 0 0 0 5px rgba(232,64,28,.55), 0 50px 100px -30px rgba(232,64,28,.32); }
+.phone--hl figcaption strong { color: var(--accent); }
+.phone--raw figcaption strong { color: var(--paper); }
+
+/* capability preview: frame follows the image's shape, image never cropped */
+.cap-float { width: 256px; height: 320px; aspect-ratio: auto; background: var(--paper-2); transition: opacity .35s var(--ease), scale .5s var(--ease), width .45s var(--ease), height .45s var(--ease); }
+.cap-float img { object-fit: contain; }
+
+/* experience / education headings */
+.xp + .xp { margin-top: 48px; }
+.xp__h { display: flex; align-items: baseline; gap: 12px; margin-bottom: 14px; font-weight: 800; font-stretch: 72%; font-size: clamp(30px, 2.8vw, 44px); line-height: 1; letter-spacing: -.01em; color: var(--ink); }
+.xp__h .label { color: var(--muted); }

@@ -4,18 +4,36 @@ import { useEffect, useRef, useState } from "react";
 import { capabilities } from "@/lib/content";
 import Lines from "./Lines";
 
-/* Services list. On desktop a preview follows the pointer down the rows. */
+/* Services list. On desktop a preview follows the pointer down the rows.
+   The frame takes each image's own shape, so nothing is cropped. */
+const H = 320; // preview height in px
+const box = (w: number, h: number) => {
+  const r = w / h;
+  const width = Math.round(Math.min(440, Math.max(180, H * r)));
+  return { width, height: Math.round(width / r) };
+};
 export default function Capabilities() {
   const float = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(-1);
+  const [ready, setReady] = useState<Record<number, boolean>>({});
+
+  // images that finished loading before hydration never fire onLoad
+  useEffect(() => {
+    const imgs = float.current?.querySelectorAll("img") ?? [];
+    const done: Record<number, boolean> = {};
+    imgs.forEach((im, i) => im.complete && im.naturalWidth > 0 && (done[i] = true));
+    setReady((r) => ({ ...r, ...done }));
+  }, []);
 
   useEffect(() => {
     const el = float.current;
     if (!el || !window.matchMedia("(hover: hover) and (min-width: 900px)").matches) return;
     let x = 0, y = 0, cx = 0, cy = 0, raf = 0;
     const move = (e: PointerEvent) => {
-      x = e.clientX + 24;
-      y = e.clientY - 150;
+      // keep the whole frame inside the window
+      const w = el.offsetWidth, h = el.offsetHeight;
+      x = e.clientX + 28 + w > window.innerWidth - 16 ? e.clientX - 28 - w : e.clientX + 28;
+      y = Math.min(window.innerHeight - h - 16, Math.max(16, e.clientY - h / 2));
     };
     const tick = () => {
       cx += (x - cx) * 0.14;
@@ -50,9 +68,23 @@ export default function Capabilities() {
           ))}
         </ul>
       </div>
-      <div className={`cap-float${active >= 0 ? " on" : ""}`} ref={float} aria-hidden="true">
+      <div
+        className={`cap-float${active >= 0 && ready[active] ? " on" : ""}`}
+        ref={float}
+        aria-hidden="true"
+        style={active >= 0 ? box(capabilities[active].img.w, capabilities[active].img.h) : undefined}
+      >
         {capabilities.map((c, i) => (
-          <img key={c.t} src={c.img.src} alt="" className={i === active ? "on" : ""} loading="lazy" decoding="async" />
+          <img
+            key={c.t}
+            src={c.img.src}
+            width={c.img.w}
+            height={c.img.h}
+            alt=""
+            className={i === active ? "on" : ""}
+            decoding="async"
+            onLoad={() => setReady((r) => (r[i] ? r : { ...r, [i]: true }))}
+          />
         ))}
       </div>
     </section>

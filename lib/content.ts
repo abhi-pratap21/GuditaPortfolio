@@ -28,7 +28,7 @@ export const person = {
   cv: "/cv/Gudita-Jain-CV.pdf",
   // Portrait (4:5) for the About section. Set to null to fall back to the monogram.
   portrait: "/img/gudita.webp" as string | null,
-  portraitSize: { w: 680, h: 850 },
+  portraitSize: { w: 1091, h: 1364 },
   status: "Open to briefs",
 };
 
@@ -1112,11 +1112,11 @@ export const aiAd = {
   dur: 52.28,
   fps: 25,
   lead: "Every face, room and city in this ad was generated. The hook, pacing, captions, sound and the cut were made by hand.",
-  note: "An Instagram ad for Lovart, an AI design agent. The presenter is one AI character carried through twelve scenes without his face, outfit or pose drifting. That consistency is the hard part, and the behind-the-scenes cuts show where it happens.",
+  note: "An Instagram ad for Lovart, an AI design agent, posted in a dark and a light version. Each final ad splits the screen: the Lovart workspace on top showing every step, the AI presenter below. In the middle is the presenter cut they were built from, one AI character carried through twelve scenes without his face, outfit or pose drifting.",
   cuts: [
-    { id: "final", label: "Final ad", sub: "As it ran · with sound", audio: true, src: { hd: "/video/lovart-ad.mp4", sd: "/video/lovart-ad-540.mp4" }, poster: im("lovart/poster-ad", 720, 1280, "Lovart ad: an AI-generated presenter under a LOVART title.") },
-    { id: "dark", label: "How it was built", sub: "Lovart workspace · dark", audio: false, src: { hd: "/video/lovart-process-01.mp4", sd: "/video/lovart-process-01.mp4" }, poster: im("lovart/poster-process-01", 720, 1280, "Behind the scenes: the Lovart workspace above, the finished shot below.") },
-    { id: "light", label: "How it was built", sub: "Lovart workspace · light", audio: false, src: { hd: "/video/lovart-process-02.mp4", sd: "/video/lovart-process-02.mp4" }, poster: im("lovart/poster-process-02", 720, 1280, "Behind the scenes in the light workspace.") },
+    { id: "dark", final: true, tab: "Final · dark", label: "Final ad", sub: "Dark · as posted", audio: true, src: { hd: "/video/lovart-process-01.mp4", sd: "/video/lovart-process-01.mp4" }, poster: im("lovart/poster-process-01", 720, 1280, "Final ad, dark version: the Lovart workspace above the presenter.") },
+    { id: "raw", final: false, tab: "The build", label: "How it was built", sub: "The AI presenter cut", audio: false, src: { hd: "/video/lovart-ad.mp4", sd: "/video/lovart-ad-540.mp4" }, poster: im("lovart/poster-ad", 720, 1280, "The AI-generated presenter cut the ads were built from.") },
+    { id: "light", final: true, tab: "Final · light", label: "Final ad", sub: "Light · as posted", audio: false, src: { hd: "/video/lovart-process-02.mp4", sd: "/video/lovart-process-02.mp4" }, poster: im("lovart/poster-process-02", 720, 1280, "Final ad, light version: the Lovart workspace above the presenter.") },
   ],
   beats: [
     { t: 0, label: "Hook", text: "Three seconds, straight to camera, before anyone can scroll past." },
@@ -1334,7 +1334,6 @@ export const archive: Piece[] = [
   p(I.catfe.shelter, "Bus shelter", "Catfé", "Print & outdoor"),
   p(I.sbux.splash, "Splash screen", "Starbucks app", "Web & UI"),
   p(I.arihant.shivratri, "Maha Shivratri", "Arihant", "Social"),
-  p(I.amrut.poll, "The recommendation test", "Amrut.AI", "Social"),
   p(I.catfe.system, "The system together", "Catfé", "Identity"),
   p(I.arihant.earlyYears, "Early years", "Arihant", "Print & outdoor"),
   p(I.skin.sunscreen, "Why sunscreen", "SkinVibes", "Social"),
@@ -1343,6 +1342,7 @@ export const archive: Piece[] = [
   p(I.arihant.republic, "Republic Day", "Arihant", "Social"),
   p(I.amrut.shortlist, "The shortlist", "Amrut.AI", "Social"),
   p(I.arihant.baisakhi, "Baisakhi", "Arihant", "Social"),
+  p(I.amrut.poll, "The recommendation test", "Amrut.AI", "Social"),
   p(I.freelance.urbanBuy, "2 din, 2 guna fayda: Republic Day sale", "Urban Buy superstore", "Print & outdoor", true),
 ];
 
@@ -1350,7 +1350,7 @@ export const capabilities = [
   { t: "Brand identity", d: "Logotype, palette, stationery and the rules that keep it consistent across every surface.", x: "Catfé · Glow Grow", img: I.catfe.logoClay },
   { t: "Social & campaigns", d: "Carousels, ad series, admissions drives and a festive calendar that never misses a morning.", x: "Amrut.AI · Arihant", img: I.amrut.questions },
   { t: "Print & packaging", d: "Posters, menus, pouches, letterheads, standees and bus shelters, checked at real size.", x: "Catfé · Arihant", img: I.catfe.bag },
-  { t: "AI video & motion", d: "AI-generated ads directed and finished by hand, product films, camera moves, kinetic captions and short-form edits.", x: "Lovart · Premiere Pro · After Effects", img: im("lovart/poster-ad", 720, 1280, "") },
+  { t: "AI video & motion", d: "AI-generated ads directed and finished by hand, motion graphics, product films, kinetic captions and short-form edits.", x: "Lovart · Premiere Pro · After Effects", img: im("lovart/poster-ad", 720, 1280, "") },
   { t: "Web, UI & email", d: "Landing pages, app flows and email creatives laid out for a phone screen and a two-second decision.", x: "Starbucks app · SkinVibes", img: I.sbux.splash },
   { t: "Critique & direction", d: "Reviewing work against the brief, writing feedback a designer can act on, and setting one direction a campaign can hold.", x: "Nuage webinar", img: I.nuage.redesign },
 ];
@@ -1366,13 +1366,16 @@ export const experience = [
   { role: "Graphic Designer & Video Editor", org: "Amrut.AI", where: "Vancouver, Canada · Hybrid", when: "Aug 2026 – Now", now: true },
   { role: "Graphic & Social Media Designer", org: "Arihant Educational Group", where: "Arihant Public School, Kota · Hybrid", when: "Jan – Jul 2026" },
   { role: "Freelance Graphic Designer", org: "Independent practice", where: "Identities, logo systems, social", when: "Feb 2025 – Jan 2026" },
+];
+
+export const education = [
   { role: "B.Des. Animation & Gaming", org: "Graphic Era Hill University", where: "Dehradun", when: "2022 – 2026" },
-  { role: "Advanced Professional Multimedia", org: "Arena Animation", where: "Dehradun · Online", when: "Oct 2025 – Now" },
+  { role: "Advanced Professional Multimedia", org: "Arena Animation", where: "Dehradun · Online", when: "Oct 2025 – Now", now: true },
 ];
 
 export const toolset = [
   { h: "Design", items: ["Adobe Photoshop", "Adobe Illustrator", "Figma", "Canva"] },
-  { h: "Motion & video", items: ["Adobe Premiere Pro", "Adobe After Effects", "Kinetic type", "Short-form edits"] },
+  { h: "Motion & video", items: ["Adobe Premiere Pro", "Adobe After Effects", "Motion graphics", "AI-generated ads & video", "Kinetic type & captions", "Short-form edits & reels"] },
   { h: "AI tools", items: ["Lovart", "Higgsfield", "Midjourney", "Adobe Firefly", "ChatGPT, Gemini, Claude"] },
 ];
 
