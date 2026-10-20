@@ -38,10 +38,10 @@ export default function About() {
             </p>
             <p>
               I started with identity work: Catfé, a cat café I took from logotype to signage, packaging and outdoor;
-              SkinVibes, a natural skincare label; and marks like the Glow Grow lettermark. As a freelancer I designed for
-              retail, food and education clients. In 2026 I moved into high-volume design, first in-house at Arihant
-              Public School in Kota, then as graphic designer and video editor for Amrut.AI, an AI-visibility platform
-              based in Vancouver.
+              SkinVibes, a natural skincare label; and marks like the Glow Grow lettermark. In 2026 I moved into
+              high-volume design, first in-house at Arihant Public School in Kota, then as graphic designer and video
+              editor for Amrut.AI, an AI-visibility platform based in Vancouver. Alongside, I still freelance for retail,
+              food and education clients.
             </p>
             <p>
               The motion side comes from my degree in Animation &amp; Gaming, and today it includes motion graphics and AI-generated ads that I direct and finish by hand. Different audiences, same discipline:

@@ -1406,7 +1406,7 @@ export const steps = [
 export const experience = [
   { role: "Graphic Designer & Video Editor", org: "Amrut.AI", where: "Vancouver, Canada · Hybrid", when: "Aug 2026 – Now", now: true },
   { role: "Graphic & Social Media Designer", org: "Arihant Educational Group", where: "Arihant Public School, Kota · Hybrid", when: "Jan – Jul 2026" },
-  { role: "Freelance Graphic Designer", org: "Independent practice", where: "Identities, logo systems, social", when: "Feb 2025 – Jan 2026" },
+  { role: "Freelance Graphic Designer", org: "Independent practice", where: "Identities, logo systems, social", when: "Feb 2025 – Now", now: true },
 ];
 
 export const education = [
