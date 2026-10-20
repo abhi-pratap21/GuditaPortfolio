@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { reels, type Reel } from "@/lib/content";
 import Lines from "./Lines";
 import AiAd from "./AiAd";
+import SpecAd from "./SpecAd";
 
 /* A small edit suite around real renders: the program monitor plays the selected clip,
    the timeline is built from that clip's own frames, and the bin switches between clips. */
@@ -165,13 +166,14 @@ export default function EditSuite() {
           ]}
         />
         <p className="rv">
-          AI-generated ads directed and finished in the edit, product films and motion. Watch the final ad play beside
-          the build that made it, then open the edit suite below.
+          AI-generated ads directed and finished in the edit, a rhythm-cut spec ad, product films and motion. Watch the
+          final ad beside the build that made it, then the cut, then the edit suite.
         </p>
       </div>
 
       <div className="wrap">
         <AiAd />
+        <SpecAd />
       </div>
 
       <div className="wrap suite__head">

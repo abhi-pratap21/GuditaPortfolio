@@ -1139,6 +1139,31 @@ export const aiAd = {
   tools: ["Lovart", "Text to image", "Image to video", "Premiere Pro", "Kinetic captions", "Sound design", "9:16"],
 };
 
+/* ---------------- spec ad: rhythm edit ---------------- */
+
+export const specAd = {
+  title: "Coca-Cola: Open the chill",
+  tag: "Spec ad · self-initiated, not affiliated with The Coca-Cola Company",
+  year: "2026",
+  dur: 30,
+  src: "/video/coke-open-the-chill.mp4",
+  poster: im("coke/poster", 480, 848, "End card: Open the chill, a Coca-Cola bottle and a glass of ice on red."),
+  lead: "A 30-second spot cut to one rule: a new shot every three seconds, and a two-word line on each.",
+  note: "Macro pours and ice on a red set alternate with a sunny afternoon in the park, so product and mood trade places beat for beat. Six short supers build the script, and the seventh lands it.",
+  supers: [
+    { t: 0, line: "Turn it up." },
+    { t: 1.5, line: "Open the moment." },
+    { t: 4.5, line: "Ice cold." },
+    { t: 8.5, line: "Sun out." },
+    { t: 11.5, line: "Good company." },
+    { t: 16.5, line: "Take it easy." },
+    { t: 25, line: "Open the chill." },
+  ],
+  /** shot boundaries in seconds, measured from the cut */
+  cuts: [0, 1.5, 4.5, 8.5, 11.5, 14.5, 16.5, 19.5, 23, 25, 30],
+  tools: ["9:16", "Rhythm edit", "Kinetic supers", "Product macro", "Sound to picture"],
+};
+
 /* ---------------- motion reel ---------------- */
 
 /* Each video in the Motion section. To add one: compress it into /public/video
@@ -1218,12 +1243,24 @@ export const reels: Reel[] = [
 
 /* ---------------- home page ---------------- */
 
-export const heroCards: { img: Img; tag: string; slug: string }[] = [
-  { img: I.amrut.searchLess, tag: "Amrut.AI · 2026", slug: "amrut-ai" },
-  { img: I.catfe.window, tag: "Catfé · 2025", slug: "catfe" },
-  { img: I.nuage.v2Portrait, tag: "Nuage · 2026", slug: "nuage-webinar" },
-  { img: I.arihant.science, tag: "Arihant · 2026", slug: "arihant" },
-  { img: I.catfe.pBogo, tag: "Catfé · 2025", slug: "catfe" },
+/* The hero deck rotates through these; the first five are on screen at load. */
+export const heroCards: { img: Img; tag: string; href: string; video?: string }[] = [
+  { img: I.amrut.searchLess, tag: "Amrut.AI · 2026", href: "/work/amrut-ai/" },
+  { img: I.catfe.window, tag: "Catfé · 2025", href: "/work/catfe/" },
+  { img: im("hero-lovart", 480, 600, "Lovart AI ad: an AI-generated presenter walking out of a phone screen."), tag: "Lovart AI ad · 2026", href: "/#motion", video: "/video/hero/lovart.mp4" },
+  { img: I.arihant.science, tag: "Arihant · 2026", href: "/work/arihant/" },
+  { img: I.nuage.v2Portrait, tag: "Nuage · 2026", href: "/work/nuage-webinar/" },
+  { img: I.catfe.pBogo, tag: "Catfé · 2025", href: "/work/catfe/" },
+  { img: I.skin.care, tag: "SkinVibes · 2025", href: "/work/skinvibes/" },
+  { img: im("hero-coke", 480, 600, "Spec ad: cola splashing into a glass of ice."), tag: "Spec ad · 2026", href: "/#motion", video: "/video/hero/coke.mp4" },
+  { img: I.amrut.favourite, tag: "Amrut.AI · 2026", href: "/work/amrut-ai/" },
+  { img: I.marks.ggPositive, tag: "Glow Grow · logo", href: "/work/logos/" },
+  { img: im("hero-clario", 480, 600, "Clario hero animation: budgeting app landing page."), tag: "Clario motion · 2026", href: "/#motion", video: "/video/hero/clario.mp4" },
+  { img: I.arihant.summer, tag: "Arihant · 2026", href: "/work/arihant/" },
+  { img: I.catfe.pCookies, tag: "Catfé · 2025", href: "/work/catfe/" },
+  { img: im("hero-amrut", 480, 600, "Amrut.AI company profile film: the Google profile page."), tag: "Amrut.AI film · 2026", href: "/#motion", video: "/video/hero/amrut.mp4" },
+  { img: I.amrut.questions, tag: "Amrut.AI · 2026", href: "/work/amrut-ai/" },
+  { img: I.sbux.splash, tag: "Starbucks app · UX", href: "/work/starbucks-app/" },
 ];
 
 export const reel: { img: Img; tag: string }[] = [
