@@ -168,7 +168,7 @@ export default function AiAd() {
   const b = aiAd.beats[beat];
 
   return (
-    <div className="aiad" ref={root}>
+    <div className="aiad" ref={root} id="film-lovart">
       <div className="aiad__copy rv">
         <span className="aiad__flag label">
           <span className="dot" aria-hidden="true" /> Featured · AI-generated ad · {aiAd.client} · {aiAd.year}

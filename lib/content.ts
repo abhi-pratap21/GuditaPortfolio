@@ -1139,30 +1139,70 @@ export const aiAd = {
   tools: ["Lovart", "Text to image", "Image to video", "Premiere Pro", "Kinetic captions", "Sound design", "9:16"],
 };
 
-/* ---------------- spec ad: rhythm edit ---------------- */
+/* ---------------- script-led ads: rhythm edits ---------------- */
 
-export const specAd = {
-  title: "Coca-Cola: Open the chill",
-  tag: "Spec ad · self-initiated, not affiliated with The Coca-Cola Company",
-  year: "2026",
-  dur: 30,
-  src: "/video/coke-open-the-chill.mp4",
-  poster: im("coke/poster", 480, 848, "End card: Open the chill, a Coca-Cola bottle and a glass of ice on red."),
-  lead: "A 30-second spot cut to one rule: a new shot every three seconds, and a two-word line on each.",
-  note: "Macro pours and ice on a red set alternate with a sunny afternoon in the park, so product and mood trade places beat for beat. Six short supers build the script, and the seventh lands it.",
-  supers: [
-    { t: 0, line: "Turn it up." },
-    { t: 1.5, line: "Open the moment." },
-    { t: 4.5, line: "Ice cold." },
-    { t: 8.5, line: "Sun out." },
-    { t: 11.5, line: "Good company." },
-    { t: 16.5, line: "Take it easy." },
-    { t: 25, line: "Open the chill." },
-  ],
+export type ScriptAd = {
+  id: string;
+  title: string;
+  flag: string;
+  /** small print under the block, e.g. a spec-work disclaimer */
+  tag?: string;
+  dur: number;
+  src: { hd: string; sd: string };
+  poster: Img;
+  lead: string;
+  note: string;
+  supers: { t: number; line: string }[];
   /** shot boundaries in seconds, measured from the cut */
-  cuts: [0, 1.5, 4.5, 8.5, 11.5, 14.5, 16.5, 19.5, 23, 25, 30],
-  tools: ["9:16", "Rhythm edit", "Kinetic supers", "Product macro", "Sound to picture"],
+  cuts: number[];
+  tools: string[];
 };
+
+export const scriptAds: ScriptAd[] = [
+  {
+    id: "coke",
+    title: "Coca-Cola: Open the chill",
+    flag: "Rhythm edit · spec ad · 2026",
+    tag: "Spec ad · self-initiated, not affiliated with The Coca-Cola Company",
+    dur: 30,
+    src: { hd: "/video/coke-open-the-chill.mp4", sd: "/video/coke-open-the-chill.mp4" },
+    poster: im("coke/poster", 480, 848, "End card: Open the chill, a Coca-Cola bottle and a glass of ice on red."),
+    lead: "A 30-second spot cut to one rule: a new shot every three seconds, and a two-word line on each.",
+    note: "Macro pours and ice on a red set alternate with a sunny afternoon in the park, so product and mood trade places beat for beat. Six short supers build the script, and the seventh lands it.",
+    supers: [
+      { t: 0, line: "Turn it up." },
+      { t: 1.5, line: "Open the moment." },
+      { t: 4.5, line: "Ice cold." },
+      { t: 8.5, line: "Sun out." },
+      { t: 11.5, line: "Good company." },
+      { t: 16.5, line: "Take it easy." },
+      { t: 25, line: "Open the chill." },
+    ],
+    cuts: [0, 1.5, 4.5, 8.5, 11.5, 14.5, 16.5, 19.5, 23, 25, 30],
+    tools: ["9:16", "Rhythm edit", "Kinetic supers", "Product macro", "Sound to picture"],
+  },
+  {
+    id: "ayuvya",
+    title: "Ayuvya: Diabo Plus Shot",
+    flag: "Product reel · D2C health · 2026",
+    dur: 24.13,
+    src: { hd: "/video/ayuvya-diabo.mp4", sd: "/video/ayuvya-diabo-540.mp4" },
+    poster: im("ayuvya/poster", 720, 1280, "Ayuvya Diabo Plus Shot sachet inside a ring of Ayurvedic herbs."),
+    lead: "A 24-second performance reel for an Ayurvedic sugar-support shot: the problem, the product, the ritual, the offer.",
+    note: "It opens on a real-feeling moment, a glucose meter held to camera, then turns the product into a three-beat ritual, cut, mix, drink, so the routine is the selling point. Product shots and the presenter alternate, and every line sits in the same two-tone caption so the claim reads in one glance on a muted feed.",
+    supers: [
+      { t: 0, line: "Sugar spike control?" },
+      { t: 4.75, line: "Daily routine made easy." },
+      { t: 7.25, line: "14 Ayurvedic herbs." },
+      { t: 9.75, line: "Cut. Mix. Drink." },
+      { t: 13.25, line: "30 shots = 30 days." },
+      { t: 16.5, line: "Fasting sugar + post-meal support." },
+      { t: 20.25, line: "Order now." },
+    ],
+    cuts: [0, 4.75, 7.25, 9.75, 10.75, 12, 13.25, 16.5, 18.25, 20.25, 24.13],
+    tools: ["9:16", "Performance reel", "Two-tone captions", "Product hero shots", "CTA end card"],
+  },
+];
 
 /* ---------------- motion reel ---------------- */
 
@@ -1254,6 +1294,7 @@ export const heroCards: { img: Img; tag: string; href: string; video?: string }[
   { img: I.skin.care, tag: "SkinVibes · 2025", href: "/work/skinvibes/" },
   { img: im("hero-coke", 480, 600, "Spec ad: cola splashing into a glass of ice."), tag: "Spec ad · 2026", href: "/#motion", video: "/video/hero/coke.mp4" },
   { img: I.amrut.favourite, tag: "Amrut.AI · 2026", href: "/work/amrut-ai/" },
+  { img: im("hero-ayuvya", 480, 600, "Ayuvya product reel: the Diabo Plus Shot sachet in a ring of herbs."), tag: "Ayuvya reel · 2026", href: "/#motion", video: "/video/hero/ayuvya.mp4" },
   { img: I.marks.ggPositive, tag: "Glow Grow · logo", href: "/work/logos/" },
   { img: im("hero-clario", 480, 600, "Clario hero animation: budgeting app landing page."), tag: "Clario motion · 2026", href: "/#motion", video: "/video/hero/clario.mp4" },
   { img: I.arihant.summer, tag: "Arihant · 2026", href: "/work/arihant/" },

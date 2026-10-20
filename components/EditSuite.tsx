@@ -1,10 +1,11 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { reels, type Reel } from "@/lib/content";
+import { reels, scriptAds, type Reel } from "@/lib/content";
 import Lines from "./Lines";
 import AiAd from "./AiAd";
 import SpecAd from "./SpecAd";
+import { lenis } from "./lenis";
 
 /* A small edit suite around real renders: the program monitor plays the selected clip,
    the timeline is built from that clip's own frames, and the bin switches between clips. */
@@ -16,6 +17,22 @@ const tc = (sec: number, fps: number) => {
   return `00:${p2(Math.floor(sec / 60))}:${p2(Math.floor(sec) % 60)}:${p2(f)}`;
 };
 const len = (s: number) => (s >= 60 ? `${Math.floor(s / 60)}:${p2(Math.round(s % 60))}` : `${Math.round(s)}s`);
+
+const FILMS = [
+  { id: "film-lovart", t: "Lovart", s: "AI-generated ad" },
+  { id: "film-coke", t: "Coca-Cola", s: "Rhythm-edit spec ad" },
+  { id: "film-ayuvya", t: "Ayuvya", s: "Product reel" },
+  { id: "film-suite", t: "Edit suite", s: "Product films & motion" },
+];
+
+const jump = (id: string) => (e: React.MouseEvent) => {
+  const t = document.getElementById(id);
+  if (!t) return;
+  e.preventDefault();
+  const l = lenis();
+  if (l) l.scrollTo(t, { offset: -24, duration: 1.2 });
+  else t.scrollIntoView({ behavior: "smooth", block: "start" });
+};
 
 export default function EditSuite() {
   const video = useRef<HTMLVideoElement>(null);
@@ -166,17 +183,28 @@ export default function EditSuite() {
           ]}
         />
         <p className="rv">
-          AI-generated ads directed and finished in the edit, a rhythm-cut spec ad, product films and motion. Watch the
-          final ad beside the build that made it, then the cut, then the edit suite.
+          AI-generated ads directed and finished in the edit, rhythm-cut spots, product reels and motion graphics.
+          Four pieces, in order: pick one below or keep scrolling.
         </p>
       </div>
 
       <div className="wrap">
+        <nav className="films" aria-label="Films in this section">
+          {FILMS.map((f, i) => (
+            <a key={f.id} href={`#${f.id}`} onClick={jump(f.id)} className="films__item">
+              <span className="label">{String(i + 1).padStart(2, "0")}</span>
+              <strong>{f.t}</strong>
+              <span className="films__sub">{f.s}</span>
+            </a>
+          ))}
+        </nav>
         <AiAd />
-        <SpecAd />
+        {scriptAds.map((ad, i) => (
+          <SpecAd key={ad.id} ad={ad} flip={i % 2 === 1} />
+        ))}
       </div>
 
-      <div className="wrap suite__head">
+      <div className="wrap suite__head" id="film-suite">
         <span className="label">Edit suite · product films &amp; motion</span>
         <p className="rv">
           Press play, step frame by frame, or drag along the timeline{reels.length > 1 ? ". Pick a clip from the bin to switch." : "."}

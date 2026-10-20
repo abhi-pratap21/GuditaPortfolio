@@ -1,17 +1,17 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { specAd } from "@/lib/content";
+import type { ScriptAd } from "@/lib/content";
 
 /* The rhythm-edit spec ad: one phone, the script beside it lighting up line by line,
    and the shot lengths drawn underneath so the pacing can be seen, not just felt. */
 
 const p2 = (n: number) => String(n).padStart(2, "0");
 const tc = (s: number) => `${p2(Math.floor(s / 60))}:${p2(Math.floor(s) % 60)}`;
-const SHOTS = specAd.cuts.slice(0, -1).map((t, i) => ({ t, len: specAd.cuts[i + 1] - t }));
-const AVG = (specAd.dur / SHOTS.length).toFixed(1);
 
-export default function SpecAd() {
+export default function SpecAd({ ad: specAd, flip = false }: { ad: ScriptAd; flip?: boolean }) {
+  const SHOTS = specAd.cuts.slice(0, -1).map((t, i) => ({ t, len: +(specAd.cuts[i + 1] - t).toFixed(2) }));
+  const AVG = (specAd.dur / SHOTS.length).toFixed(1);
   const root = useRef<HTMLDivElement>(null);
   const video = useRef<HTMLVideoElement>(null);
   const userPaused = useRef(false);
@@ -22,11 +22,11 @@ export default function SpecAd() {
   const ensure = useCallback(() => {
     const v = video.current!;
     if (!v.getAttribute("src")) {
-      v.src = specAd.src;
+      v.src = window.innerWidth < 760 ? specAd.src.sd : specAd.src.hd;
       v.load();
     }
     return v;
-  }, []);
+  }, [specAd]);
 
   useEffect(() => {
     if (!playing) return;
@@ -94,7 +94,7 @@ export default function SpecAd() {
   SHOTS.forEach((x, i) => t >= x.t && (shot = i));
 
   return (
-    <div className="spec" ref={root}>
+    <div className={`spec${flip ? " spec--flip" : ""}`} ref={root} id={`film-${specAd.id}`}>
       <div className="spec__stage rv">
         <figure className="phone phone--final spec__phone">
           <div className="phone__body">
@@ -133,7 +133,7 @@ export default function SpecAd() {
 
       <div className="spec__copy rv" style={{ ["--d" as string]: 1 }}>
         <span className="aiad__flag label">
-          <span className="dot" aria-hidden="true" /> Rhythm edit · spec ad · {specAd.year}
+          <span className="dot" aria-hidden="true" /> {specAd.flag}
         </span>
         <h3 className="aiad__title">{specAd.title}</h3>
         <p className="aiad__lead">{specAd.lead}</p>
@@ -153,7 +153,7 @@ export default function SpecAd() {
           <div className="rhythm__head">
             <span className="label">Shot rhythm · {SHOTS.length} shots · average {AVG}s</span>
             <span className="label">
-              Shot {p2(shot + 1)} · {SHOTS[shot].len}s
+              Shot {p2(shot + 1)} · {SHOTS[shot].len.toFixed(1).replace(".0", "")}s
             </span>
           </div>
           <div className="rhythm__bar" role="group" aria-label="Shots, click to jump">
@@ -179,7 +179,7 @@ export default function SpecAd() {
             </span>
           ))}
         </div>
-        <p className="spec__disc label">{specAd.tag}</p>
+        {specAd.tag && <p className="spec__disc label">{specAd.tag}</p>}
       </div>
     </div>
   );
