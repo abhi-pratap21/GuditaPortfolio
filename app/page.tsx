@@ -24,7 +24,7 @@ export default function Home() {
         <section id="work" aria-label="Selected work">
           <div className="wrap sec-head">
             <span className="label">(02) Selected work</span>
-            <Lines as="h2" className="display h-l" lines={["Seven projects,", <>told <em className="it">in full.</em></>]} />
+            <Lines as="h2" className="display h-l" lines={["Eight projects,", <>told <em className="it">in full.</em></>]} />
             <p className="rv">
               Identities built from a blank page, a design critique that became a campaign, a school calendar that never
               slowed down, and a startup idea explained in one look. Each one opens into a full case study.

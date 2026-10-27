@@ -159,6 +159,13 @@ export const I = {
     udupi: im("freelance/udupi-republic-day", 796, 1024, "Udupi restaurant Republic Day poster: dosa and chutneys on a banana leaf under a temple arch."),
     dolphin: im("freelance/dolphin-canada-2026", 1080, 1080, "Dolphin Education Consultancy post: Admission open for 2026, Canada, with a graduate holding a Canadian flag."),
   },
+  aamra: {
+    desktop: im("aamra/desktop-home", 1920, 800, "AAMRA desktop homepage: Jewellery for your everyday story, with gold rings on a travertine block and dried florals."),
+    mobile: im("aamra/mobile-home", 1080, 1350, "AAMRA mobile homepage: the headline above a rounded image of twisted gold hoops on a stone, and a full-width espresso button."),
+    lifestyle: im("aamra/carousel-lifestyle", 1080, 1080, "AAMRA carousel frame one: Made for your everyday, with a woman wearing gold hoops and stacked rings."),
+    product: im("aamra/carousel-product", 1080, 1080, "AAMRA carousel frame two: a single sculptural gold ring on ivory."),
+    detail: im("aamra/carousel-detail", 1080, 1080, "AAMRA carousel frame three: Subtle by design, a molten gold ring on a stone ledge."),
+  },
   clario: {
     poster: im("clario/poster", 1600, 1200, "Clario landing page: Budgeting reimagined for today's world."),
     thumbs: Array.from({ length: 12 }, (_, i) => im(`clario/t${String(i).padStart(2, "0")}`, 240, 180, "")),
@@ -176,7 +183,8 @@ export type Block =
   | { type: "rules"; items: { title: string; text: string }[] }
   | { type: "compare"; before: Shot; after: Shot }
   | { type: "quote"; text: string; by: string }
-  | { type: "statement"; big: string; line: string; accent: string };
+  | { type: "statement"; big: string; line: string; accent: string }
+  | { type: "palette"; colors: { name: string; hex: string }[]; fonts: { sample: string; name: string; use: string; style: "serif" | "sans" | "wide" }[] };
 
 export type Chapter = { n: string; title: string; id?: string; kicker?: string; intro?: string; blocks: Block[] };
 
@@ -534,6 +542,128 @@ export const projects: Project[] = [
       { n: "15+", t: "pieces carried by one mark" },
       { n: "3", t: "colours: caramel, oat and a coffee brown" },
       { n: "1", t: "mark that reads as a letter and a cat" },
+    ],
+  },
+  {
+    slug: "aamra",
+    featured: true,
+    name: "AAMRA",
+    short: "AAMRA",
+    year: "2026",
+    color: "#3A2A22",
+    text: "#F4EADB",
+    card: "Quiet luxury for a demi-fine jewellery label: a desktop and mobile homepage and a three-frame Instagram carousel.",
+    tags: ["Web design", "Social carousel", "Art direction", "Photoshop"],
+    cardMedia: [I.aamra.lifestyle, I.aamra.mobile, I.aamra.detail],
+    summary:
+      "AAMRA is a demi-fine jewellery label for women in the US and Canada who want pieces that move from work to weekend. The brief: a homepage for desktop and mobile, and a carousel that sells the same feeling in three frames. Quiet luxury, made for the everyday.",
+    meta: [
+      { k: "Role", v: "Visual designer: art direction, layout, typography, image editing" },
+      { k: "Deliverables", v: "Desktop homepage 1920 × 800, mobile homepage 1080 × 1350, carousel 3 × 1080 × 1080" },
+      { k: "Year", v: "2026" },
+      { k: "Tools", v: "Adobe Photoshop" },
+    ],
+    story: {
+      label: "The direction",
+      lead: [
+        "Jewellery this small is sold by light and restraint, not by shouting. So the brand stays quiet: warm ivory paper, espresso type, gold only where the product is.",
+      ],
+      body:
+        "The references were Mejuri and Gorjana: editorial, product-first, unhurried. Every piece uses the same four colours, one display serif for feeling and one geometric sans for doing, and soft directional window light so the gold reads as real metal.",
+    },
+    chapters: [
+      {
+        n: "01",
+        title: "Visual language",
+        kicker: "Palette & type",
+        blocks: [
+          {
+            type: "palette",
+            colors: [
+              { name: "Warm Ivory", hex: "#F4EADB" },
+              { name: "Soft Gold Light", hex: "#EFE2B8" },
+              { name: "Gold", hex: "#C99A4E" },
+              { name: "Espresso", hex: "#3A2A22" },
+            ],
+            fonts: [
+              { sample: "Aa", name: "Elegant display serif", use: "Headlines: editorial, refined", style: "serif" },
+              { sample: "Aa", name: "Clean geometric sans", use: "Body copy, navigation, buttons", style: "sans" },
+              { sample: "AAMRA", name: "Wide-tracked wordmark", use: "Logo and sign-offs", style: "wide" },
+            ],
+          },
+        ],
+      },
+      {
+        n: "02",
+        title: "Desktop homepage",
+        kicker: "Web · 1920 × 800",
+        intro:
+          "Wordmark, navigation, an eyebrow line, the serif headline, one supporting sentence and the button, stacked so the eye travels from brand to action in one sweep. Ivory paper on the left fades into a softly lit product scene on the right.",
+        blocks: [
+          {
+            type: "gallery",
+            cols: "1",
+            items: [shot(I.aamra.desktop, "Jewellery for your everyday story", "Three rings on a travertine block, dried florals and window shadow: premium, but warm enough to feel like an everyday purchase.")],
+          },
+        ],
+      },
+      {
+        n: "03",
+        title: "Mobile homepage",
+        kicker: "Web · 1080 × 1350",
+        intro:
+          "Recomposed for a phone rather than shrunk. The headline sits above the image so the message is read first, and the product is revealed on scroll.",
+        blocks: [
+          {
+            type: "annotated",
+            img: I.aamra.mobile,
+            notes: [
+              { x: 52, y: 5.4, title: "Wordmark and menu only", text: "Navigation collapses to a hamburger, so nothing competes with the brand at the top." },
+              { x: 84, y: 20, title: "Text first", text: "Eyebrow line, serif headline and one sentence sit above the image, so the message is read before the product." },
+              { x: 63, y: 66, title: "Soft, tactile image", text: "Rounded corners and directional window-light shadow make the gold read as real metal." },
+              { x: 87, y: 92.3, title: "Button in thumb reach", text: "A full-width espresso call to action anchors the bottom of the screen." },
+            ],
+          },
+        ],
+      },
+      {
+        n: "04",
+        title: "Instagram carousel",
+        kicker: "Social · 3 frames · 1080 × 1080",
+        intro: "Three frames, three ways into the product: worn, isolated, then up close. Same wordmark, same type, same colours throughout, so the swipe feels like one story.",
+        blocks: [
+          {
+            type: "swipe",
+            items: [
+              shot(I.aamra.lifestyle, "Lifestyle", "The jewellery worn in context: hoops and stacked rings in soft daylight."),
+              shot(I.aamra.product, "Product hero", "A single sculptural ring isolated on ivory: the product as the story."),
+              shot(I.aamra.detail, "Detail & texture", "Close on stone and shadow, reinforcing the line Subtle by design."),
+            ],
+          },
+        ],
+      },
+      {
+        n: "05",
+        title: "How it came together",
+        kicker: "Process",
+        blocks: [
+          {
+            type: "rules",
+            items: [
+              { title: "Research & direction", text: "Quiet-luxury positioning and the aesthetics of Mejuri and Gorjana: restrained, editorial, product-first." },
+              { title: "Visual language", text: "Warm ivory, espresso type, subtle paper grain and soft natural light." },
+              { title: "Homepage", text: "A clear hierarchy from wordmark to button, then recomposed for mobile with text above the image." },
+              { title: "Carousel", text: "Lifestyle, hero product and close-up detail, kept minimal with consistent type and colour." },
+              { title: "Assets & tools", text: "Imagery sourced and edited from ChatGPT, Unsplash and Google, then composited in Photoshop at production sizes." },
+            ],
+          },
+        ],
+      },
+    ],
+    outcome: [
+      { n: "3", t: "deliverables: desktop, mobile and social" },
+      { n: "4", t: "colours across every frame" },
+      { n: "2", t: "references set the tone: Mejuri and Gorjana" },
     ],
   },
   {
@@ -1291,6 +1421,7 @@ export const heroCards: { img: Img; tag: string; href: string; video?: string }[
   { img: I.arihant.science, tag: "Arihant · 2026", href: "/work/arihant/" },
   { img: I.nuage.v2Portrait, tag: "Nuage · 2026", href: "/work/nuage-webinar/" },
   { img: I.catfe.pBogo, tag: "Catfé · 2025", href: "/work/catfe/" },
+  { img: I.aamra.lifestyle, tag: "AAMRA · 2026", href: "/work/aamra/" },
   { img: I.skin.care, tag: "SkinVibes · 2025", href: "/work/skinvibes/" },
   { img: im("hero-coke", 480, 600, "Spec ad: cola splashing into a glass of ice."), tag: "Spec ad · 2026", href: "/#motion", video: "/video/hero/coke.mp4" },
   { img: I.amrut.favourite, tag: "Amrut.AI · 2026", href: "/work/amrut-ai/" },
@@ -1307,6 +1438,7 @@ export const heroCards: { img: Img; tag: string; href: string; video?: string }[
 export const reel: { img: Img; tag: string }[] = [
   { img: I.amrut.questions, tag: "Amrut.AI" },
   { img: I.catfe.pCookies, tag: "Catfé" },
+  { img: I.aamra.product, tag: "AAMRA" },
   { img: I.marks.fbApplied, tag: "FlixBus concept" },
   { img: I.arihant.summer, tag: "Arihant" },
   { img: I.nuage.v2Landscape, tag: "Nuage" },
@@ -1341,6 +1473,7 @@ const p = (img: Img, title: string, client: string, cat: Category, wide?: boolea
 export const archive: Piece[] = [
   p(I.amrut.searchLess, "People search less", "Amrut.AI", "Social"),
   p(I.catfe.window, "Window vinyl", "Catfé", "Print & outdoor"),
+  p(I.aamra.lifestyle, "Made for your everyday", "AAMRA", "Social"),
   p(I.marks.ggPositive, "Glow Grow lettermark", "Glow Grow", "Identity"),
   p(I.arihant.science, "Science exhibition", "Arihant", "Print & outdoor"),
   p(I.nuage.redesign, "7,000: webinar redesign", "Nuage", "Social"),
@@ -1370,6 +1503,8 @@ export const archive: Piece[] = [
   p(I.catfe.bag, "Bean pouch", "Catfé", "Identity"),
   p(I.nuage.v1Landscape, "A4 poster, indigo", "Nuage", "Print & outdoor"),
   p(I.arihant.sports, "Sports fiesta", "Arihant", "Print & outdoor"),
+  p(I.aamra.mobile, "Mobile homepage", "AAMRA", "Web & UI"),
+  p(I.aamra.detail, "Subtle by design", "AAMRA", "Social"),
   p(I.amrut.tenTabs, "One answer replaces ten tabs", "Amrut.AI", "Social"),
   p(I.skin.launch, "Sunscreen launch", "SkinVibes", "Social"),
   p(I.catfe.shelter, "Bus shelter", "Catfé", "Print & outdoor"),
@@ -1383,6 +1518,7 @@ export const archive: Piece[] = [
   p(I.arihant.republic, "Republic Day", "Arihant", "Social"),
   p(I.amrut.shortlist, "The shortlist", "Amrut.AI", "Social"),
   p(I.arihant.baisakhi, "Baisakhi", "Arihant", "Social"),
+  p(I.aamra.desktop, "Desktop homepage", "AAMRA", "Web & UI", true),
   p(I.amrut.poll, "The recommendation test", "Amrut.AI", "Social"),
   p(I.freelance.urbanBuy, "2 din, 2 guna fayda: Republic Day sale", "Urban Buy superstore", "Print & outdoor", true),
 ];
@@ -1392,7 +1528,7 @@ export const capabilities = [
   { t: "Social & campaigns", d: "Carousels, ad series, admissions drives and a festive calendar that never misses a morning.", x: "Amrut.AI · Arihant", img: I.amrut.questions },
   { t: "Print & packaging", d: "Posters, menus, pouches, letterheads, standees and bus shelters, checked at real size.", x: "Catfé · Arihant", img: I.catfe.bag },
   { t: "AI video & motion", d: "AI-generated ads directed and finished by hand, motion graphics, product films, kinetic captions and short-form edits.", x: "Lovart · Premiere Pro · After Effects", img: im("lovart/poster-ad", 720, 1280, "") },
-  { t: "Web, UI & email", d: "Landing pages, app flows and email creatives laid out for a phone screen and a two-second decision.", x: "Starbucks app · SkinVibes", img: I.sbux.splash },
+  { t: "Web, UI & email", d: "Landing pages, app flows and email creatives laid out for a phone screen and a two-second decision.", x: "AAMRA · Starbucks app", img: I.aamra.mobile },
   { t: "Critique & direction", d: "Reviewing work against the brief, writing feedback a designer can act on, and setting one direction a campaign can hold.", x: "Nuage webinar", img: I.nuage.redesign },
 ];
 

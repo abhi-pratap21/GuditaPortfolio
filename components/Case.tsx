@@ -143,6 +143,33 @@ function BlockView({ b, group }: { b: Block; group: string }) {
           })}
         </div>
       );
+    case "palette":
+      return (
+        <div className="pal">
+          <div className="pal__colors">
+            {b.colors.map((c, i) => (
+              <figure key={c.hex} className="pal__chip rv" style={{ ["--d" as string]: i }}>
+                <span style={{ background: c.hex }} />
+                <figcaption>
+                  <strong>{c.name}</strong>
+                  <span>{c.hex}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+          <ul className="pal__type">
+            {b.fonts.map((f) => (
+              <li key={f.name} className="rv">
+                <b className={`pal__sample pal__sample--${f.style}`}>{f.sample}</b>
+                <div>
+                  <strong>{f.name}</strong>
+                  <span>{f.use}</span>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
     case "rules":
       return (
         <ul className="rules" style={{ ["--n" as string]: b.items.length }}>
