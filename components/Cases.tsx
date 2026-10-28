@@ -1,9 +1,40 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { projects } from "@/lib/content";
 import { ArrowUpRight } from "./Icons";
+
+/* Under 900px the rows swipe sideways; this shows which card is in view. */
+function SwipeHint({ target, count }: { target: React.RefObject<HTMLDivElement | null>; count: number }) {
+  const [i, setI] = useState(0);
+  useEffect(() => {
+    const el = target.current;
+    if (!el) return;
+    const on = () => {
+      const kids = Array.from(el.children) as HTMLElement[];
+      const mid = el.scrollLeft + el.clientWidth * 0.35;
+      let k = 0;
+      kids.forEach((c, j) => c.offsetLeft <= mid && (k = j));
+      setI(k);
+    };
+    el.addEventListener("scroll", on, { passive: true });
+    return () => el.removeEventListener("scroll", on);
+  }, [target]);
+  return (
+    <div className="swipe-hint" aria-hidden="true">
+      <span className="label">
+        <b>{String(i + 1).padStart(2, "0")}</b> / {String(count).padStart(2, "0")}
+      </span>
+      <span className="swipe-hint__dots">
+        {Array.from({ length: count }, (_, j) => (
+          <i key={j} className={j === i ? "on" : ""} />
+        ))}
+      </span>
+      <span className="label">Swipe →</span>
+    </div>
+  );
+}
 
 const featured = projects.filter((p) => p.featured);
 const more = projects.filter((p) => !p.featured);
@@ -12,6 +43,7 @@ const more = projects.filter((p) => !p.featured);
    The rest sit underneath as a pair of smaller cards. */
 export default function Cases() {
   const ref = useRef<HTMLDivElement>(null);
+  const moreRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const root = ref.current;
@@ -95,11 +127,13 @@ export default function Cases() {
         ))}
       </div>
 
+      <div className="wrap swipe-hint-wrap"><SwipeHint target={ref} count={featured.length} /></div>
+
       <div className="wrap more">
         <div className="more__head">
           <span className="label">More work</span>
         </div>
-        <div className="more__grid">
+        <div className="more__grid" ref={moreRef}>
           {more.map((p) => (
             <Link
               key={p.slug}
@@ -127,6 +161,7 @@ export default function Cases() {
           ))}
         </div>
       </div>
+      <div className="wrap swipe-hint-wrap swipe-hint-wrap--more"><SwipeHint target={moreRef} count={more.length} /></div>
     </>
   );
 }

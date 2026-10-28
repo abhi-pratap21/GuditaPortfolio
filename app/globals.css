@@ -917,8 +917,8 @@ h1, h2, h3, h4, p, figure, blockquote { margin: 0; }
   .aiad__tabs button { flex: 1; height: 38px; border-radius: 999px; border: 1px solid var(--night-line); font: 500 11px var(--f-mono); text-transform: uppercase; letter-spacing: .04em; color: #C9C2B7; }
   .aiad__tabs button.is-on { background: var(--paper); color: var(--ink); border-color: var(--paper); }
   .aiad__phones { grid-template-columns: 1fr; justify-items: center; }
-  .phone { display: none; width: min(78vw, 320px); }
-  .phone.is-on { display: block; }
+  .aiad .phone { display: none; width: min(78vw, 320px); }
+  .aiad .phone.is-on { display: block; }
   .aiad__beat:not(.is-on) span { display: none; }
 }
 
@@ -1058,3 +1058,26 @@ html, body { overflow-x: clip; }
 .pal__type span { display: block; margin-top: 3px; color: var(--ink-2); font-size: 14.5px; }
 @media (max-width: 900px) { .pal { grid-template-columns: 1fr; } }
 @media (max-width: 520px) { .pal__colors { grid-template-columns: 1fr 1fr; } .pal__chip > span { aspect-ratio: 16 / 9; } .pal__type li { grid-template-columns: 84px 1fr; } }
+
+/* ---------- mobile: work swipes sideways ---------- */
+.swipe-hint-wrap { display: none; }
+@media (max-width: 900px) {
+  .cases, .more__grid {
+    display: flex; gap: 12px; overflow-x: auto; overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter);
+    padding-bottom: 4px; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  }
+  .cases::-webkit-scrollbar, .more__grid::-webkit-scrollbar { display: none; }
+  .cases > .case, .more__grid > .mcard { flex: 0 0 86%; scroll-snap-align: start; margin-bottom: 0; }
+  .cases { padding-bottom: 4px; }
+  .cases > .case:last-child, .more__grid > .mcard:last-child { margin-right: var(--gutter); }
+  .swipe-hint-wrap { display: block; }
+  .swipe-hint { display: flex; align-items: center; gap: 12px; margin-top: 14px; }
+  .swipe-hint b { color: var(--ink); font-weight: 600; }
+  .swipe-hint__dots { flex: 1; display: flex; gap: 5px; }
+  .swipe-hint__dots i { height: 3px; flex: 1; max-width: 26px; border-radius: 2px; background: var(--line-2); transition: background .3s; }
+  .swipe-hint__dots i.on { background: var(--accent); }
+  .swipe-hint-wrap--more { margin-bottom: clamp(40px, 6vw, 90px); }
+  .more { padding-bottom: 0; }
+}
+@media (max-width: 900px) { .more__head { margin-top: 56px; } }
